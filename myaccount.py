@@ -23,6 +23,11 @@ class BankAccount:
         self.transactions.append(transaction_log)
 
     def deposit(self, amount):
+
+
+        This program is designed for handle Bank account of school management and teacher
+        to make easy for the parents of students 
+        
         """Deposits a specified amount into the account."""
         if amount <= 0:
             print("Error: Deposit amount must be greater than zero.")
