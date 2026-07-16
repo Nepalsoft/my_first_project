@@ -1,0 +1,45 @@
+import matplotlib.pyplot as plt
+import numpy as np
+
+# १. समीकरणका मानहरू (C++ कोडकै म्याट्रिक्स अनुसार)
+# Demand: Q + 2P = 10  => Q = 10 - 2P
+# Supply: Q - 3P = -5  => Q = -5 + 3P
+
+# मूल्य (P) को रेन्ज तय गर्ने (ग्राफ स्पष्ट देखाउन $० देखि $६ सम्म)
+P_values = np.linspace(0, 6, 100)
+
+# २. मूल्यको आधारमा माग (Q_demand) र आपूर्ति (Q_supply) को गणना
+Q_demand = 10 - 2 * P_values
+Q_supply = -5 + 3 * P_values
+
+# ३. सन्तुलन बिन्दु (C++ कोडबाट निक्लेको नतिजा: Q=4, P=3)
+eq_P = 3
+eq_Q = 4
+
+# ४. ग्राफ प्लट गर्ने (Plotting)
+plt.figure(figsize=(8, 6))
+
+# मागको रेखा (Demand Curve) - नीलो रङ
+plt.plot(Q_demand, P_values, label='Demand Curve (Q = 10 - 2P)', color='blue', linewidth=2)
+
+# आपूर्तिको रेखा (Supply Curve) - रातो रङ
+plt.plot(Q_supply, P_values, label='Supply Curve (Q = -5 + 3P)', color='red', linewidth=2)
+
+# सन्तुलन बिन्दु (Equilibrium Point) लाई चिन्ह लगाउने - हरियो डट
+plt.scatter(eq_Q, eq_P, color='green', s=150, zorder=5, label=f'Equilibrium Point (Q={eq_Q}, P=${eq_P})')
+
+# सन्तुलन बिन्दुबाट अक्ष (Axes) हरूमा ड्यास लाइन कोर्ने
+plt.axvline(x=eq_Q, color='gray', linestyle='--', alpha=0.7)
+plt.axhline(y=eq_P, color='gray', linestyle='--', alpha=0.7)
+
+# ५. ग्राफको सजावट र नामहरू
+plt.title('Market Equilibrium (बजार सन्तुलन ग्राफ)', fontsize=14, fontweight='bold', pad=15)
+plt.xlabel('Quantity (Q) - परिमाण', fontsize=12)
+plt.ylabel('Price (P) - मूल्य ($)', fontsize=12)
+plt.xlim(0, 12) # X-axis को सीमा
+plt.ylim(0, 6)  # Y-axis को सीमा
+plt.grid(True, linestyle=':', alpha=0.6) # पृष्ठभूमिमा ग्रिड रेखा
+plt.legend(fontsize=11) # सङ्केत सूची
+
+# ग्राफ स्क्रिनमा देखाउने
+plt.show()
