@@ -1,0 +1,96 @@
+#include <iostream>
+#include <string>
+#include <vector>
+#include <fstream>
+#include <iomanip>
+
+// Object-Oriented Design: Class to manage individual Nepali student profiles
+class AcademicRecord {
+private:
+	std::string studentName;
+	long long tuRegistrationNumber; // TU Registration Format
+	double terminalExamScore;
+	double practicalScore;
+	double boardExamScore;
+	
+public:
+	// Constructor with clean parameters to initialize data safely
+	AcademicRecord(std::string name, long long regNum, double terminal, double practical, double board) {
+		studentName = name;
+		tuRegistrationNumber = regNum;
+		terminalExamScore = terminal;
+		practicalScore = practical;
+		boardExamScore = board;
+	}
+	
+	// Method to calculate total weightage based on TU evaluation system
+	double calculateFinalPercentage() const {
+		// 20% Terminal, 20% Practical, 60% Final Board Exam
+		return (terminalExamScore * 0.20) + (practicalScore * 0.20) + (boardExamScore * 0.60);
+	}
+	
+	// Method to determine the Division based on Government grading scheme
+	std::string determineDivision() const {
+		double totalPercentage = calculateFinalPercentage();
+		if (totalPercentage >= 80.0) return "Distinction";
+		if (totalPercentage >= 60.0) return "First Division";
+		if (totalPercentage >= 50.0) return "Second Division";
+		if (totalPercentage >= 40.0) return "Pass Division";
+		return "Failed";
+	}
+	
+	// Safely packages data as a comma-separated text string for data logging
+	std::string getCsvFormat() const {
+		return std::to_string(tuRegistrationNumber) + "," + studentName + "," + 
+		std::to_string(calculateFinalPercentage()) + "," + determineDivision();
+	}
+	
+	// Formats terminal output dynamically for structured grid display
+	void renderRow() const {
+		std::cout << std::left << std::setw(15) << tuRegistrationNumber 
+		<< std::setw(22) << studentName 
+		<< std::setw(15) << std::fixed << std::setprecision(2) << calculateFinalPercentage() 
+		<< std::setw(15) << determineDivision() << std::endl;
+	}
+};
+
+int main() {
+	std::vector<AcademicRecord> tuDatabase;
+	
+	std::cout << "=========================================================\n";
+	std::cout << "    TRIBHUVAN UNIVERSITY - STUDENT ANALYTICS SYSTEM      \n";
+	std::cout << "=========================================================\n";
+	
+	// Injecting authentic Nepali student database entities to verify origin authenticity
+	tuDatabase.push_back(AcademicRecord("Aayush Sharma", 2026110045, 85.0, 90.0, 82.5));
+	tuDatabase.push_back(AcademicRecord("Prerana Thapa", 2026110092, 72.5, 88.0, 64.0));
+	tuDatabase.push_back(AcademicRecord("Rohan Shrestha", 2026110123, 50.0, 60.0, 42.0));
+	tuDatabase.push_back(AcademicRecord("Anjali Adhikari", 2026110156, 92.0, 95.0, 88.5));
+	
+	// Displaying the real-time system tracking reports on terminal
+	std::cout << std::left << std::setw(15) << "TU Reg No" 
+	<< std::setw(22) << "Student Name" 
+	<< std::setw(15) << "Final (%)" 
+	<< std::setw(15) << "Division" << std::endl;
+	std::cout << "---------------------------------------------------------\n";
+	
+	for (const auto& student : tuDatabase) {
+		student.renderRow();
+	}
+	std::cout << "---------------------------------------------------------\n";
+	
+	// File Handling System: Exporting structured data analytics into a storage file
+	std::ofstream fileExporter("tu_student_ledger.csv");
+	if (fileExporter.is_open()) {
+		fileExporter << "TU_Reg_No,Student_Name,Final_Percentage,Division\n"; // CSV Header
+		for (const auto& student : tuDatabase) {
+			fileExporter << student.getCsvFormat() << "\n";
+		}
+		fileExporter.close();
+		std::cout << "\n[SYSTEM INTIMATION] Ledger generated successfully: 'tu_student_ledger.csv'" << std::endl;
+	} else {
+		std::cerr << "\n[CRITICAL ERROR] File permission denied. Cannot write ledger backup." << std::endl;
+	}
+	
+	return 0;
+}
