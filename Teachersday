@@ -1,0 +1,12 @@
+#include<iostream>
+using namespace std;
+
+int main()
+{
+cout<<" Today is the Greatest teachers day I have to pray to my great teachers of universe likewise Durga to whom all Gods provided various types of wepons and she perished all the evils of the world likewise all the sagas and Rishis of the world released their some power that formed a light that made Durlabhopanishad Jaya ho Biswa Guru the Great.I made this statement as a my faith toward my Great Guru. "<<endl;
+
+
+return 0;
+
+
+}
