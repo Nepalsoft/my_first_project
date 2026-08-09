@@ -1,0 +1,52 @@
+#include <iostream>
+#include <vector>
+#include <string>
+
+int main() {
+	// Multi-color grid: 0=Blank, 1=Red, 2=Green, 3=Yellow
+	std::vector<std::string> colorDhakaPattern = {
+	"0000100001000010000",
+	"0001210012100121000",
+	"0012321012321012321",
+	"0123332112333211233",
+	"1233333212333332123",
+	"0123332112333211233",
+	"0012321012321012321",
+	"0001210012100121000",
+	"0000100001000010000",
+	"0000000000000000000",
+	"2000000020000000200",
+	"2300000323000003230",
+	"2310001323100013231",
+	"2311011323110113231",
+	"2311111323111113231",
+	"2311011323110113231",
+	"2310001323100013231",
+	"2300000323000003230",
+	"2000000020000000200"
+};
+	
+	std::cout << "--- Multi-Color Dhaka Pattern (ANSI Terminal Color) ---" << std::endl << std::endl;
+	
+	for (const std::string& row : colorDhakaPattern) {
+		for (char pixel : row) {
+			if (pixel == '1') {
+				// Print red 'X'
+				std::cout << "\033[1;31mX\033[0m ";
+			} else if (pixel == '2') {
+				// Print green 'X'
+				std::cout << "\033[1;32mX\033[0m ";
+			} else if (pixel == '3') {
+				// Print yellow 'X'
+				std::cout << "\033[1;33mX\033[0m ";
+			} else {
+				// Print dot for empty space
+				std::cout << ". ";
+			}
+		}
+		std::cout << std::endl;
+	}
+	
+	std::cout << std::endl << "-------------------------------------------------------" << std::endl;
+	return 0;
+}
