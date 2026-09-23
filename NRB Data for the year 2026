@@ -1,0 +1,40 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# १. नेपाल राष्ट्र बैंकको २०२६/२७ (आ.व. २०८३/८४) मौद्रिक नीतिको डाटा
+policy_data = {
+    'Indicators (सूचकहरू)': [
+        'Target Inflation', 
+        'Target GDP Growth', 
+        'Private Credit Growth', 
+        'Money Supply (M2) Growth',
+        'Policy Rate',
+        'Bank Rate',
+        'CRR'
+    ],
+    'Percentage (%)': [5.5, 7.0, 11.0, 14.0, 4.5, 5.75, 4.0]
+}
+
+# २. डाटालाई Pandas DataFrame मा बदल्ने
+df = pd.DataFrame(policy_data)
+print("\n--- NRB Monetary Policy 2026/27 Targets ---")
+print(df.to_string(index=False))
+
+# ३. डाटालाई भिजुअलाइज (Graph) गर्ने
+plt.figure(figsize=(10, 6))
+colors = ['red', 'green', 'blue', 'orange', 'purple', 'brown', 'pink']
+bars = plt.bar(df['Indicators (सूचकहरू)'], df['Percentage (%)'], color=colors)
+
+# बारको माथि प्रतिशतको नम्बर लेख्ने
+for bar in bars:
+    yval = bar.get_height()
+    plt.text(bar.get_x() + bar.get_width()/2, yval + 0.3, f"{yval}%", ha='center', va='bottom', fontweight='bold')
+
+plt.title('NRB Monetary Policy Targets & Rates (FY 2026/27 / 2083-84)', fontsize=14, fontweight='bold')
+plt.ylabel('Percentage (%)', fontsize=12)
+plt.xticks(rotation=30, ha='right')
+plt.ylim(0, 17)
+plt.grid(axis='y', linestyle='--', alpha=0.7)
+plt.tight_layout()
+plt.show()
+
