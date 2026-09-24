@@ -1,0 +1,29 @@
+markdown# Econometrics for Law and Public Policy
+
+This repository contains production-ready Python implementations of fundamental econometric models. The workflows demonstrate how to handle, clean, and analyze economic and legal-tech datasets using state-of-the-art libraries.
+
+## 🚀 Implemented Models
+
+1. **Ordinary Least Squares (OLS) Linear Regression**
+   - Estimates the baseline linear relationship between economic indicators.
+   - Includes full standard error diagnostic summaries.
+
+2. **Log-Linear Econometric Model (Mincer Earnings Function)**
+   - Transforms continuous variables (e.g., Wage) using natural logarithms.
+   - Enables direct percentage (%) return interpretations for policy evaluation and litigation damage calculations.
+
+## 🛠️ Tech Stack & Requirements
+
+The scripts are fully compatible with **Python 3.13+** and utilize the following data-science libraries:
+
+```bash
+pip install pandas numpy statsmodels
+```
+
+- **Pandas**: Used for structured data manipulation and data cleaning.
+- **Statsmodels**: Used to estimate regression equations and generate detailed diagnostic summaries (R-squared, p-values, t-statistics).
+
+## 📊 Key Use Cases in Legal Practice
+- **Labor Law & Discrimination Disputes**: Calculating percentage differences in salary benchmarks based on qualifications.
+- **Antitrust & Competition Law**: Measuring market dominance impacts via elasticities.
+- **Policy Analysis**: Quantifying the concrete causal effects of new legislation 
