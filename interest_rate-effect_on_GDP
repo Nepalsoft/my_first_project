@@ -1,0 +1,42 @@
+import matplotlib.pyplot as plt
+import numpy as np
+
+# १. ब्याजदर (२% देखि १५%) र GDP को समीकरण
+interest_rates = np.linspace(2, 15, 100)
+base_gdp = 500
+gdp = base_gdp - (interest_rates ** 1.8)
+
+# २. मुख्य विन्दुहरू (Points of Interest) को पहिचान
+gdp_at_2 = base_gdp - (2 ** 1.8)     # सुरुवाती स्वस्थ विन्दु
+gdp_at_5 = base_gdp - (5 ** 1.8)     # सामान्य अवस्थाको अन्त्य (Soft Bend सुरु)
+gdp_at_8 = base_gdp - (8 ** 1.8)     # तीव्र गिरावट सुरु (Aggressive Bend)
+gdp_at_15 = base_gdp - (15 ** 1.8)   # अत्यधिक उच्च ब्याजदर
+
+# ३. ग्राफ प्लट गर्ने
+plt.figure(figsize=(10, 6))
+plt.plot(interest_rates, gdp, color='black', linewidth=3, label='GDP Curve')
+
+# ४. अर्थतन्त्रका ३ वटा क्षेत्रहरूलाई Shade (रंग) गर्ने
+plt.axvspan(2, 5, color='green', alpha=0.15, label='Normal Zone (Stable GDP)')
+plt.axvspan(5, 8, color='orange', alpha=0.15, label='Caution Zone (Soft Bend)')
+plt.axvspan(8, 15, color='red', alpha=0.15, label='Aggressive Bend Zone (High Risk)')
+
+# ५. मुख्य विन्दुहरू (Markers) राख्ने
+plt.scatter([2, 5, 8, 15], [gdp_at_2, gdp_at_5, gdp_at_8, gdp_at_15], color='blue', zorder=5)
+
+# ६. प्रत्येक विन्दुमा के भइरहेको छ स्पष्ट लेख्ने (Labels)
+plt.text(2.2, gdp_at_2, f'Start (2%)\nGDP: ${gdp_at_2:.1f}B', fontsize=9, fontweight='bold', color='green')
+plt.text(5.2, gdp_at_5 - 10, f'Soft Bend (5%)\nGDP: ${gdp_at_5:.1f}B', fontsize=9, fontweight='bold', color='orange')
+plt.text(8.2, gdp_at_8 + 10, f'Aggressive Bend (8%)\nGDP: ${gdp_at_8:.1f}B', fontsize=9, fontweight='bold', color='red')
+plt.text(12.5, gdp_at_15 + 15, f'Max Tight (15%)\nGDP: ${gdp_at_15:.1f}B', fontsize=9, color='darkred')
+
+# ७. ग्राफको सजावट
+plt.title('How GDP Bends as Interest Rate Increases', fontsize=14, fontweight='bold', pad=15)
+plt.xlabel('Interest Rate (%)', fontsize=12)
+plt.ylabel('Gross Domestic Product (GDP in Billions $)', fontsize=12)
+plt.grid(True, linestyle='--', alpha=0.5)
+plt.legend(loc='upper right')
+plt.tight_layout()
+
+# ग्राफ प्रदर्शन
+plt.show()
